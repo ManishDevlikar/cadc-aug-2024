@@ -1,0 +1,72 @@
+mysql> show databases;
+
+
+mysql> use cadc;
+ERROR 1049 (42000): Unknown database 'cadc'
+mysql> use cdac;
+Database changed
+mysql> -- 1) create the customer table with given structure
+mysql> create table customer(email_address varchar(75) primary key,
+    -> first_name varchar(50),
+    -> last_name varchar(50),
+    -> address1 varchar(50),
+    -> address2 varchar(50),
+    -> customer_zip varchar(10),
+    -> area_code char(3),
+    -> telephone_number char(7));
+Query OK, 0 rows affected (2.37 sec)
+
+mysql> insert into customer values('manish@gmail.com','manish','devlikar','khardi','mumbai','421302','150','1234567');
+Query OK, 1 row affected (0.31 sec)
+
+mysql> insert into customer values('raj@gmail.com','raj','tangadi','khardi','mumbai','421302','150','1234567'),('sunny@gmail.com','sunny','devlikar','khardi','mumbai','421302','150','1234567');
+Query OK, 2 rows affected (0.16 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> -- 2) create table cardinfo table with the given structure.
+mysql> create table cardinfo(card_id int primary key
+    -> ^C
+mysql> create table cardinfo(card_id int primary key,
+    -> ccnum varchar(16),
+    -> ccexp date,
+    -> name_on_card varchar(100),
+    -> email_address varchar(75));
+Query OK, 0 rows affected (2.00 sec)
+
+mysql> insert into cardinfo(101,'1234 5678 9090','2024/09/02','manish','manish.gmail.com');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '101,'1234 5678 9090','2024/09/02','manish','manish.gmail.com')' at line 1
+mysql> insert into cardinfo(101,'1234 5678 9090','2024-09-02','manish','manish.gmail.com');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '101,'1234 5678 9090','2024-09-02','manish','manish.gmail.com')' at line 1
+mysql> insert into cardinfo(101,'123456789090','2024-09-02','manish','manish.gmail.com');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '101,'123456789090','2024-09-02','manish','manish.gmail.com')' at line 1
+mysql> insert into cardinfo(101,'123456789090','2024-02-09','manish','manish.gmail.com');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '101,'123456789090','2024-02-09','manish','manish.gmail.com')' at line 1
+mysql> insert into cardinfo values(101,'123456789090','2024-02-09','manish','manish.gmail.com'),(102,'123456789093','2024-02-09','sunny','sunny.gmail.com'),(103,'123456789091','2024-02-09','raj','raj.gmail.com');
+Query OK, 3 rows affected (0.20 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> -- 3) create the cardtype table with the given structure
+mysql> create table cardtype(
+    -> card_id int primary key,
+    -> card_type varchar(20));
+Query OK, 0 rows affected (1.61 sec)
+
+mysql> insert into cardtype values(101,'debit'),(102,'visa'),(103,'mastercard');
+Query OK, 3 rows affected (0.15 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> -- 4) create the local table with the given structure 
+mysql> create table local(
+    -> zip varchar(10) primary key,
+    -> city varchar(50),
+    -> state char(2));
+Query OK, 0 rows affected (0.92 sec)
+
+mysql> insert into local values('421302','bhiwandi','maharastra'),('400621','thane','maharastra'),('400768','thane','maharastra');
+ERROR 1406 (22001): Data too long for column 'state' at row 1
+mysql> insert into local values('421302','bhiwandi','mh'),('400621','thane','mh'),('400768','thane','mh');
+Query OK, 3 rows affected (0.12 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into local values('421302','bhiwandi','mh'),('400621','thane','mh'),('400768','thane','mh');
+ERROR 1062 (23000): Duplicate entry '421302' for key 'local.PRIMARY'

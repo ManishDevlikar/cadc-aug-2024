@@ -1,0 +1,356 @@
+--rounds of interview
+1 aptitude test  	--> rs argarwal
+	--1 hr
+	-- lang / eng test
+	-- maths
+	-- logical test 
+	-- verbal test
+	-- quantitative test
+        --60% --
+2 tech test mcq / program test
+	-- 1 hr
+3 tech interview
+4 gr discussion
+	-- English comm : 0.5 hr 
+5 hr round
+
+durga soft ---java  --1 hr
+.net ---
+data structure
+
+
+===========
+Data model
+  it is a pictorial representation the database
+
+--types of data model
+1 Hierarchical Model
+2 Network Model
+3 relational model
+
+--Hierarchical Model
+tree structure.
+parent -- child relationship
+one to one or one to many relationship can be possible
+easy to understand
+repeating information.
+parent node --is a root node
+
+--dis adv 
+many to many relationship is not possible
+===================
+Network Model
+ pointer concept is present
+ links present
+ 
+--adv
+1. one to one, one to many,  many to many relationship is possible
+
+--dis adv
+it is complex to read if number of records are more and more
+
+==
+Relational Model
+ we have tables
+ easy
+ 
+===
+===========================
+--relationships
+1 one to one
+	one student goes to 1 college
+	one emp will join 1 company
+	
+2 one to many
+	1 department will have many employees working
+	1 trainer --- many students
+
+3 many to many
+	many departments will have many employees working
+	many students goes to many colleges
+
+==========
+---Normalization
+it is a database design technique
+it is used to avoid repeatation of the data
+redundancy of the data is avoided
+the data will be reliable , correct, normal using Normalization
+Normalization is performed by database designer or database architecture
+Normalization is used before creating the table
+
+--types forms
+1NF	1st normal form
+A relation is said to be in “first normal form” (1NF) if and only if all its attributes assume only atomic values. 
+
+2NF	2nd normal form
+A relation is said to be in 2NF if and only if it is in 1NF and every non-key attribute is fully functionally dependent on the primary key.
+--> we remove the functional dependency
+
+3NF	3rd normal form
+	remove transitive dependency
+
+--transitive dependency
+if values of c2 depends on the values of c1 and 
+if values of c3 depends on the values of c2 then
+c3 depends on the values of c1 . 
+
+---------------->
+--------> ------>
+c1	c2	c3
+10	x	aa
+20	y	bb
+30	z	cc
+10	x	aa
+20	y	bb
+
+==orderdetails
+pk --> orderno + itemno
+orderno itemno  qty price  custno  name	address	city
+		y   y	    n       n    n 	n 
+=======================
+BCNF(Boyce Codd Normal form)
+	this is a special normalization form
+
+t1
+	c1 + c2
+	c2 + c3
+
+--conditions 
+1 there should be multiple candidate keys
+	c1 + c2
+	c2 + c3
+2 candidate keys are composite
+	
+3 and it is overlapping
+	common col : c2
+
+==============
+--- 3 /4 days
+1 decide what tables required
+2 cols  names
+3 pk
+4 fk
+5 uk
+----------> coding -------> 
+===================
+show databases;
+use cdac;
+show tables;
+select * from dept;
+select * from emp;
+
+--display all the names of emp who are not receiving the commission
+select ename, comm from emp
+where comm is null or comm=0;
+
+--display all the names of emp who are receiving the commission
+select ename, comm from emp
+where comm is not null;
+
+--to display first 2 rows
+select * from emp 
+limit 2;
+
+--skip first 2 rows and display next 3 rows
+select * from emp 
+limit 2, 3;
+
+--display ename who are from deptno 10 and who are all manager and from deptno 20 and who are analyst
+select ename from emp
+where (deptno = 10 and job= 'manager') or  (deptno = 20 and job= 'analyst')
+BODMAS rule 
+
+--display ename who are manager from deptno 10 and whose are receiving the comm
+select ename from emp
+where job='manager' and deptno = 10 and comm is not null;
+      -------------	------------	----------------
+	  1			2		3
+
+--expression 
+c1 or c2 and c3 or c4 not c5
+		   --------
+			1
+      --------
+	2
+---------------
+    3
+-----------------------------
+	4
+--hierarchy of logical operator
+1 not
+2 and
+3 or
+----------------------------------------------
+--predicates
+1 in 			: exact match
+2 between 		: range	
+3 like			: to search for pattern
+
+--between 
+--display the name of emp , whose sal>= 1000   and <=2000
+select ename from emp
+where sal >=1000 and sal <=2000;
+
+select ename , sal from emp
+where sal between 1000 and 2000;
+
+------------|-------|--------
+	  1000     2000
+--display the name of emp , whose sal<1000   and >000
+select ename, sal  from emp
+where sal not between 1000 and 2000;
+
+--display the name of emp joined in 2012
+select ename , hiredate from emp
+where hiredate between '2012-1-1' and '2012-12-31';
+
+--display the name of emp joined in 2012 or 2013
+
+--display the name of emp NOT joined in 2012
+
+----display the name of emp from deptno 10 and 20
+select ename from emp
+where deptno =10 or deptno=20;
+
+select ename from emp
+where deptno in (10, 20);
+
+----display the name of emp not from deptno 10 and 20
+select ename from emp
+where deptno not in (10, 20);
+
+----display the name of emp who are manager or analyst or salesman
+select ename from emp
+where job in ('manager','analyst','salesman');
+
+--like  : 
+--wild characters
+%	: replacement of 0 or more characters
+_	: replacement of 1 character
+
+--display names of employees whose name starts with A letter
+select ename from emp
+where ename like 'A%';
+
+--end with R
+select ename from emp
+where ename like '%r';
+
+--anywhere A 
+select ename from emp
+where ename like '%A%';
+
+--5 ch 
+select ename from emp
+where ename like '_____';
+
+--3 ch R followed by any ch
+select ename from emp
+where ename like '__R%';
+
+--3 ch R and 6 ch r , followed by any ch
+select ename from emp
+where ename like '__R__R%';
+
+2.25 --- lab 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

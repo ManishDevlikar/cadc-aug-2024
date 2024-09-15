@@ -1,0 +1,380 @@
+ 1-> Select the employee in department 30.
+
+mysql> select * from emp where deptno =30;
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+6 rows in set (0.03 sec)
+
+2->List the names, numbers and department of all clerks.
+mysql> select ename,empno,deptno from emp where job ='clerk';
++--------+-------+--------+
+| ename  | empno | deptno |
++--------+-------+--------+
+| SMITH  |  7369 |     20 |
+| ADAMS  |  7876 |     20 |
+| JAMES  |  7900 |     30 |
+| MILLER |  7934 |     10 |
++--------+-------+--------+
+4 rows in set (0.00 sec)
+
+3)	Find the depart numbers and the name of employee of all dept with Deptno greater or equal to 20.
+mysql> select ename,deptno from emp where deptno >=20;
++--------+--------+
+| ename  | deptno |
++--------+--------+
+| SMITH  |     20 |
+| ALLEN  |     30 |
+| WARD   |     30 |
+| JONES  |     20 |
+| MARTIN |     30 |
+| BLAKE  |     30 |
+| SCOTT  |     20 |
+| TURNER |     30 |
+| ADAMS  |     20 |
+| JAMES  |     30 |
+| FORD   |     20 |
++--------+--------+
+11 rows in set (0.00 sec)
+
+4)	Find the employees whose commission is greater than their salary.
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--4)	Find the employees whose commission is greater than their salary.' at line 1
+mysql> select ename, sal,comm from emp where comm>sal;
++--------+---------+---------+
+| ename  | sal     | comm    |
++--------+---------+---------+
+| MARTIN | 1250.00 | 1400.00 |
++--------+---------+---------+
+1 row in set (0.00 sec)
+
+5)	Find the employees whose commission is greater than 60 percent of their salary.
+mysql> select ename, sal*(60/100) as sal60per,comm from emp where comm>(60/100)*sal;
++--------+------------+---------+
+| ename  | sal60per   | comm    |
++--------+------------+---------+
+| MARTIN | 750.000000 | 1400.00 |
++--------+------------+---------+
+1 row in set (0.00 sec)
+
+ 6)	Find the employee whose commission is greater than 50 percent of their salary.
+mysql> select emp.*, comm,sal*0.5 as sal50per from emp where comm>sal*0.5;
++-------+--------+----------+------+------------+---------+---------+--------+---------+----------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno | comm    | sal50per |
++-------+--------+----------+------+------------+---------+---------+--------+---------+----------+
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 | 1400.00 |  625.000 |
++-------+--------+----------+------+------------+---------+---------+--------+---------+----------+
+1 row in set (0.00 sec)
+
+ 7)	List the name, job and salary of all employees in dept 20 who earn more than 2000.
+mysql> select ename,job,sal from emp where deptno = 20 && sal>2000;
++-------+---------+---------+
+| ename | job     | sal     |
++-------+---------+---------+
+| JONES | MANAGER | 2975.00 |
+| SCOTT | ANALYST | 3000.00 |
+| FORD  | ANALYST | 3000.00 |
++-------+---------+---------+
+3 rows in set, 1 warning (0.00 sec)
+
+ 8)	Find all salesmen in dept 30 whose salary is greater than or equal to Rs. 1500.
+
+mysql> select ename,job,deptno,sal from emp where sal>=1500 && job='salesman' ;
++--------+----------+--------+---------+
+| ename  | job      | deptno | sal     |
++--------+----------+--------+---------+
+| ALLEN  | SALESMAN |     30 | 1600.00 |
+| TURNER | SALESMAN |     30 | 1500.00 |
++--------+----------+--------+---------+
+2 rows in set, 1 warning (0.00 sec)
+
+ 9)	Find all the employees whose job is either a president or manager.
+mysql> select * from emp where job in('president','manager');
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+ 10)	Find all managers who are not in dept 30.
+mysql> select ename,job,deptno from emp where job ='manager' and deptno !=30;
++-------+---------+--------+
+| ename | job     | deptno |
++-------+---------+--------+
+| JONES | MANAGER |     20 |
+| CLARK | MANAGER |     10 |
++-------+---------+--------+
+2 rows in set (0.00 sec)
+
+ 11)	Find the details of all managers and clerks in dept 10.
+mysql> select * from emp where deptno = 10 && job in ('manager','clerk');
++-------+--------+---------+------+------------+---------+------+--------+
+| empno | ename  | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+---------+------+------------+---------+------+--------+
+|  7782 | CLARK  | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7934 | MILLER | CLERK   | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+---------+------+------------+---------+------+--------+
+2 rows in set, 1 warning (0.00 sec)
+
+ 12)	Find the details of all manager (in any dept) and all clerks in dept 10.
+mysql> select * from emp where (job = 'manager') || (job = 'clerk' && deptno=10); 
++-------+--------+---------+------+------------+---------+------+--------+
+| empno | ename  | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+---------+------+------------+---------+------+--------+
+|  7566 | JONES  | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE  | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK  | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7934 | MILLER | CLERK   | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+---------+------+------------+---------+------+--------+
+4 rows in set, 2 warnings (0.00 sec)
+
+ 13)	Find the details of all managers in dept 10 and all clerks in dept 20.
+mysql> select * from emp where (job ='manager' && deptno=10) || (job='clerk' && deptno=20);
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+3 rows in set, 3 warnings (0.00 sec)
+
+ 14)	And all employees who are neither clerks nor manager but whose salary is greater than or equal to Rs. 2000.
+mysql> select * from emp where job not in('clerk','manager') && sal>=2000;
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+-----------+------+------------+---------+------+--------+
+3 rows in set, 1 warning (0.00 sec)
+
+15)	Find the names of everyone in deptno 20 who is neither a clerk nor a Manager.
+mysql> select ename,deptno,job from emp where deptno=20 and job not in('clerk','manager');
++-------+--------+---------+
+| ename | deptno | job     |
++-------+--------+---------+
+| SCOTT |     20 | ANALYST |
+| FORD  |     20 | ANALYST |
++-------+--------+---------+
+2 rows in set (0.00 sec)
+
+16)	Find the employees who earns between Rs. 1200 and Rs.1400.
+mysql> select * from emp where sal between 1200 and 1400;
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+17)	Find the employees who are clerks, analysts or salesman.
+mysql> select * from emp where job in ('clerk','analyst','salesman');
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+10 rows in set (0.00 sec)
+
+ 18)	Find the employees who are not clerks, analyst or salesman.
+mysql> select * from emp where job not in ('clerk','analyst','salesman');
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+19)	Find the employees who do not receive a commission.
+mysql> select * from emp where comm is null || comm=0;
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 | 0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+11 rows in set, 1 warning (0.00 sec)
+
+20)	Find the employee whose commission is Rs. 0.
+mysql> select * from emp where comm =0;
++-------+--------+----------+------+------------+---------+------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+----------+------+------------+---------+------+--------+
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 | 0.00 |     30 |
++-------+--------+----------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+ 21)	Find the different jobs of the employees receiving commission.
+
+
+mysql> select ename,job from emp where comm !=0 and comm is not null;
++--------+----------+
+| ename  | job      |
++--------+----------+
+| ALLEN  | SALESMAN |
+| WARD   | SALESMAN |
+| MARTIN | SALESMAN |
++--------+----------+
+3 rows in set (0.00 sec)
+
+22)	Find all employees who do not receive a commission or whose Commission is less than Rs. 100.
+
+mysql> select ename,comm from emp where comm is null or comm <100;
++--------+------+
+| ename  | comm |
++--------+------+
+| SMITH  | NULL |
+| JONES  | NULL |
+| BLAKE  | NULL |
+| CLARK  | NULL |
+| SCOTT  | NULL |
+| KING   | NULL |
+| TURNER | 0.00 |
+| ADAMS  | NULL |
+| JAMES  | NULL |
+| FORD   | NULL |
+| MILLER | NULL |
++--------+------+
+11 rows in set (0.00 sec)
+
+23)	Find all employees whose names begin with m.
+mysql> select * from emp where ename like 'm%';
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+2 rows in set (0.05 sec)
+
+ 24)	Find all employees whose names end with m.
+mysql> select * from emp where ename like '%m';
+Empty set (0.00 sec)
+
+25)	Find all employees whose names contain the letter m in any case.
+mysql> select * from emp where ename like '%m%';
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+5 rows in set (0.00 sec)
+
+ 26)	Find the employees whose names are 5 characters long and end with n.
+mysql> select ename from emp where ename like '____n';
++-------+
+| ename |
++-------+
+| ALLEN |
++-------+
+1 row in set (0.00 sec)
+
+27)	Find the employees who have the letter r as the third letter in their name.
+mysql> select ename from emp where ename like '__r%';
++--------+
+| ename  |
++--------+
+| WARD   |
+| MARTIN |
+| TURNER |
+| FORD   |
++--------+
+4 rows in set (0.00 sec)
+
+ 28)	Find all employees hired in month of February (of any year).
+mysql> select * from emp where hiredate like '%-02-%';
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | sal     | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7521 | WARD  | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+ 29)	Find the managers hired in the year 2012.
+mysql> select ename, job from emp where job ='manager' and hiredate between '2012-01-01' and '2012-12-31';
+Empty set (0.00 sec)
+
+ 30)	Display the names of all employees with any 'L'.
+mysql> select ename from emp where ename like '%l%';
++--------+
+| ename  |
++--------+
+| ALLEN  |
+| BLAKE  |
+| CLARK  |
+| MILLER |
++--------+
+4 rows in set (0.00 sec)
+
+ 31)	Display the name of all employees, and their bonus. Assume each Employee gets a bonus of 20 percent of his salary subject to the Maximum of Rs. 500.
+
+
+mysql> select emp.*, sal*0.2 as bonus from emp where sal*0.2<=500;
++-------+--------+----------+------+------------+---------+---------+--------+---------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno | bonus   |
++-------+--------+----------+------+------------+---------+---------+--------+---------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |    NULL |     20 | 160.000 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 | 320.000 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 | 250.000 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 | 250.000 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 | 490.000 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 | 300.000 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 | 220.000 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 | 190.000 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 | 260.000 |
++-------+--------+----------+------+------------+---------+---------+--------+---------+
+9 rows in set (0.00 sec)
+
+32)	Display the name of all employees, and their bonus. Assume each employee gets a bonus of 20 percent of his salary subject to the Maximum of Rs. 200.
+
+mysql> select emp.* , sal*0.2 as bonus from emp where sal*0.2<=200;
++-------+-------+-------+------+------------+--------+------+--------+---------+
+| empno | ename | job   | mgr  | hiredate   | sal    | comm | deptno | bonus   |
++-------+-------+-------+------+------------+--------+------+--------+---------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 | 800.00 | NULL |     20 | 160.000 |
+|  7900 | JAMES | CLERK | 7698 | 1981-12-03 | 950.00 | NULL |     30 | 190.000 |
++-------+-------+-------+------+------------+--------+------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> exit;

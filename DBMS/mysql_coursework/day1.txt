@@ -1,0 +1,762 @@
+Day1
+Database
+
+what is table?
+it is collection of rows /records /tuples
+
+dept
+deptno	dname 	loc	--> attributes / fields 
+10	acct	mum  	--> tuple
+20	mkt	bang
+30	fin	hyd
+40	oper 	nashik
+
+dept	20 row
+deptno
+dname 
+loc
+
+personal_emp		300000
+empno
+ename 
+address
+mobile
+email
+deptno
+adhar
+pan
+
+emp_dept		79000
+id
+empid
+deptno
+
+
+
+project		500
+proj_id
+proj_name
+tot_gr
+stdate
+enddate
+remark
+
+sal		780000
+empid		
+basic
+pf
+bonus
+comm
+hra
+da
+tax
+
+attendance	80000
+empno
+month
+no_pre 
+no_abs
+remark
+
+emp_project    45000
+id
+proj_id
+emp_id
+stdate
+enddate
+no_proj
+remark
+
+
+travel		67000
+empid
+km
+st_pt
+end_pt
+stdate
+enddate
+sttime
+endtime
+remark
+
+
+loan		50000
+id
+empid
+type
+loan_amt
+st_date
+end_date
+interest
+inst_amt
+charges
+remark
+
+
+100 tables
+
+
+what is database
+it is a collection of tables
+it is a collection of related information 
+it is a collection of structured and non structured data
+
+		database
+		 |
+	-----------------------------
+	|			|
+	structured		non structured
+	data			data
+	|			|
+	RDBMS			NOSQL
+(relational database		(non only sql)
+management system)			
+	|			|
+ms sql server, MySQL		mongodb, Cassandra, Neo4j ...
+oracle, postsql ...
+	|			|
+	70 tables		20 tables
+
+DBMS
+database management system 
+eg : clipper, FoxPro, foxbase
+
+RDBMS
+relational database management system 
+eg :
+oracle, 
+ms sql server
+MySQL
+ms access
+Sybase
+ingress
+infomix
+PostgreSQL  		..
+DB2			
+..
+..
+
+DBA
+database administrator
+
+it is a role , who has the highest privileges on the database 
+
+functions of DBA
+1 Create new user
+2 drop the users
+3 change the password of user
+4 grants the privileges / access to the users
+5 revoke the access
+6 memory management 
+
+
+priti	uma	gauri
+1mb	2mb	3mb
+
+master table 
+this table is not changed(insert, delete, update) frequently
+eg : airline reservation
+		--airplane_schedule table 
+		--airline names
+      railway reservation
+		-- train_schedule
+      
+
+
+transaction table
+this table is  changed(insert, delete, update) frequently
+eg : airline reservation
+		--passenger_details table 
+	
+      railway reservation
+		-- passenger_details table 
+      banking
+		--account_transaction
+
+MySQL is distributed architecture
+
+		server  100 table
+		  |
+	 ------------------------------
+	|		|		|
+	client1		client2		client3
+	|
+	select * from emp;
+
+
+gmail --> 
+
+session
+	 related to client machine
+
+instance
+	 related to server machine
+
+
+--different languages
+DDL -- data definition language
+	create, drop , alter, truncate
+
+DML --data manipulation language
+	insert, update, delete
+
+DCL  --data control language
+	grant, revoke
+	
+DQL  --data query language
+	select
+
+TCL	-- transaction control language
+	commit , rollback, savepoint
+
+==
+create: to create a new table
+drop : to drop table, 
+	will delete all the rows with the structure of the table
+alter:  to change the structure of the table
+truncate : will delete all the rows but the structure will be 	reserved
+insert : to add a new row
+delete: delete row
+update : to change the data
+grant : to give the access/ privileges to other user
+revoke : to take back the access/ privileges from other user
+select : to retrieve the rows
+commit : to save changes permenatly on the server m/c
+rollback : undo
+savepoint : to create the book marks
+
+==========
+different keys
+1 primary key / natural key / super key / master key
+2 foreign key
+3 unique key
+4 candidate key
+5 alternate key
+6 composite key
+
+--primary key
+  it is an identity of the row 
+  it is unique and not null
+  eg : dept ------> deptno
+	emp-----   > empno
+	student ---> rollno
+
+--what is null?
+it is unknown , value is missing 
+empty value
+
+dept
+deptno	dname 	loc	--> attributes / fields 
+10	acct	mum  	--> tuple
+20	mkt	bang
+30	fin	hyd
+40	oper 	nashik
+
+
+
+---------------------------------
+--foreign key
+  it is a field inside the table which is pk of another table
+  it can be null, can be repeated.
+  it is used to create a relationship between the 2 tables
+
+dept
+deptno --> pk
+deptno	dname 	loc	
+10	acct	mum  	
+20	mkt	bang
+30	fin	hyd
+40	oper 	nashik
+
+emp
+empno--> pk 
+deptno --> fk
+empno	ename 	sal 	deptno
+1	pr	50000	10
+2	uma	55000	10
+3	usha	56000	20
+4	ria	30000	null
+
+--diff in pk and fk
+--1
+pk can not be repeated
+fk can be repeated
+
+--2
+pk can not be null
+fk can be null
+
+=============
+unique key
+  the values are unique , can not be repeated
+  can be null
+
+personal_emp
+empno	pk
+ename	
+email	uk
+adhar	uk
+pan	uk
+mobile	uk
+div_no	uk
+
+--diff in pk and uk
+--1
+pk : can not be null
+uk : can be null
+
+--2
+pk : there will be only 1 col as pk
+uk : there can be multiple cols given as uk
+
+--------------------
+--candidate key
+  these are the fields where the values are unique and not null and can be selected for a pk
+
+--eg  deptno,dname, loc	(3 cols)
+
+pk : deptho (1)
+ak(alternate key) : dname, loc : 3-1=2	
+
+
+dept
+deptno	dname 	loc	
+10	acct	mum  	
+20	mkt	bang
+30	fin	hyd
+40	oper 	nashik
+
+===========
+composite key
+  it is a pk consisting of 2 or more cols
+
+empleave
+empno	stdate		enddate
+1	2024-1-1	2024-1-1
+2	2024-1-1	2024-1-1
+1	2024-2-20	2024-2-22
+1	2024-3-10	2024-3-19
+
+pk : empno + stdate	
+
+
+
+
+
+
+
+2024-1-1
+yyyy-mm-dd
+
+
+-commands
+run -- > MySQL
+command line client
+password : root/password
+
+--to quit
+exit
+or
+quit
+
+username  : dac_exam
+pass: 	   cdac
+
+--installation MySQL
+community version for mysql
+
+--prompt
+MySQL>
+
+
+--to clear screen 
+\! cls
+or
+system cls
+
+-- to see the help
+help 
+or
+\h
+
+--to see all the databases
+show databases;
+
+--to create database
+create database cdac;
+
+--to open the databse
+use cdac;
+--to create table 
+create table dept(
+deptno int,
+dname varchar(20),
+loc varchar(20));
+
+insert into dept values(10, 'acct', 'mum');
+insert into dept values(20, 'mkt', 'bang');
+insert into dept values(30, 'fin', 'hyd');
+insert into dept values(40, 'oper', 'nashik');
+
+
+--command terminator
+;
+
+
+--to display all the records
+select * from dept;
+
+--create the table and insert 5 records
+create table emp(
+empno int,
+ename varchar(20),
+sal numeric(10,3),
+deptno int,
+hiredate date);
+
+insert into emp values(1, 'sanket', 30000, 10, '2024-12-10');
+
+
+insert into emp values(2, 'saM', 40000, 20, '2024-3-10'),(3, 'ria', 50000, 20, '2024-12-10'),(4, 'saket', 60000, 30, '2024-4-10');
+
+2024-1-1
+yyyy-mm-dd
+
+5000.551   numeric(7,3)
+12345.67   numeric(7,2)
+
+--customer : create a table and insert 5 records
+create table customer(
+custid int,
+cname varchar(20),
+address varchar(20),
+panno char(10));
+
+insert into customer values(1, 'pr', 'mum', 'p001');
+
+insert into customer values(2, 'raj', 'nashik 7676', 'p002');
+					   |		|
+					varchar		char
+--diff in char and varchar
+
+--to show the current database
+select database();
+
+--to see all the tables
+show tables;
+
+--to see the structure of table
+desc emp;
+
+--
+create database pragati;
+
+--to drop a database 
+drop database pragati;
+
+--to display all rows
+select * from dept;
+select * from emp;
+select * from cutomer;
+
+--display deptno, dname from dept
+select deptno, dname from dept;
+
+--display loc col
+select loc from dept;
+
+--display name of emp from emp table 
+select ename from emp;
+
+--display name of emp and sal  from emp table 
+select ename, sal from emp;
+
+--change the name to rajesh for empno 4
+update emp
+set ename='rajesh'
+where empno=4;
+
+--increase the salary by 5000 for empno 4
+update emp
+set sal=sal + 5000 
+where empno=4;
+
+
+--change the deptno to 20 for empno 2
+update emp
+set deptno=20
+where empno=2;
+
+
+--delete command
+--delete the record for empno 4
+delete from emp
+where empno=4;
+
+select * from emp;
+
+--delete the record for ename as sanket
+delete from emp
+where ename = 'sanket';
+
+--delete the record for all the emp whose hiredate is > '2024-12-1'
+delete from emp
+where hiredate > '2024-12-1';
+
+--relational operators
+>
+<
+>=
+<=
+!=		not equal to 
+<>		not equal to
+=
+
+--airthmatic op
++
+-
+*
+/
+
+--logical op
+and 
+or 
+not
+
+--drop command
+	will delete all the records along with the structure of the table
+
+drop table customer;
+
+--truncate command
+	will delete all the records but the structure will be preserved 
+
+--eg
+truncate table dept;
+select * from dept;
+desc dept;
+
+--diff in truncate and drop
+
+
+--diff in truncate and delete
+--1
+delete : dml
+truncate : ddl
+
+2
+delete : 
+truncate : faster than delete
+
+3
+delete :  "where" clause be used
+truncate : we can not use "where" clause
+
+4
+delete : rollback can be performed
+truncate : rollback can not be performed
+
+5
+delete : "trigger" can be used
+truncate : "trigger" can not be based on truncate
+
+--create a folder
+D:\Priti
+create a text file "emp_dept_script"
+
+==========================================
+--distinct
+	used to avoid the repeated values
+	it supresses the repeatation
+	show the unique values
+
+select distinct deptno from emp;
+
+--display the unique jobs
+select distinct job from emp;
+
+--display all the details of smith
+mysql> select * from emp
+    -> where ename ='smith';
+
+--note 
+the data and the command is not case sensitive 
+
+--display all the names of all managers
+select ename from emp
+where job='manager' ;
+
+--display all the names of all analyst
+
+--display all the names of all managers or analyst
+
+--display all the names who are not managers
+
+--display all the names of employees from deptno 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--group
+MET IIT PG DAC UNOFF 70 
+Chandan sharma cs106304@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

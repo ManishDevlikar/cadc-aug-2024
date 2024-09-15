@@ -1,0 +1,129 @@
+1)---------------------------------------------------
+
+
+SQL> create table client_master(client_no varchar2(6) primary key check(client_no like 'c%') ,
+	 name varchar2(20) not null, 
+	address1 varchar(30),
+	 address2 varchar(30),
+	 city varchar2(15),
+	 state varchar2(15), 
+	pincode numeric(6),
+	 bal_due numeric(10,2));
+
+Table created.
+
+SQL> desc client_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENT_NO                                 NOT NULL VARCHAR2(6)
+ NAME                                      NOT NULL VARCHAR2(20)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ CITY                                               VARCHAR2(15)
+ STATE                                              VARCHAR2(15)
+ PINCODE                                            NUMBER(6)
+ BAL_DUE                                            NUMBER(10,2)
+
+
+
+
+
+INSERT INTO client_master (client_no, name, city, state, pincode, bal_due)
+VALUES ('c00004', 'basu navindgi', 'bombay', 'maharashtra', 400056, 0);
+
+INSERT INTO client_master (client_no, name, city, state, pincode, bal_due)
+VALUES ('c00005', 'ravi sreedharan', 'delhi', 'delhi', 100001, 2000);
+
+INSERT INTO client_master (client_no, name, city, state, pincode, bal_due)
+VALUES ('c00006', 'rukhmini', 'bombay', 'maharashtra', 400050, 0);
+
+
+
+
+SQL> select * froM client_master;
+
+CLIENT NAME                 ADDRESS1                       ADDRESS2                       CITY            STATE              PINCODE    BAL_DUE
+------ -------------------- ------------------------------ ------------------------------ --------------- --------------- ---------- ----------
+c00001 ivan bayross                                                                       bombay          maharashtra         400054      15000
+c00002 vandana saitwal                                                                    madras          tamil nadu          780001          0
+c00003 pramada jaguste                                                                    bombay          maharashtra         400057       5000
+c00004 basu navindgi                                                                      bombay          maharashtra         400056          0
+c00005 ravi sreedharan                                                                    delhi           delhi               100001       2000
+c00006 rukhmini                                                                           bombay          maharashtra         400050          0
+
+6 rows selected.
+
+
+
+
+2)--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+SQL> -- table name product master.
+SQL> create table product_master(product_no varchar(6) primary key check(product_no like 'p%'), 
+	description varchar2(50) not null,
+	 profit_percent numeric(3,2) not null,
+	 unit_measure varchar2(10) not null, 
+	qty_on_hand numeric(7) not null, 
+	record_lvl numeric(8) not null, 
+	sell_price numeric(8,2) not null check(sell_price>0),
+	 cost_price numeric(8,2) not null check(cost_price>0));
+
+
+
+
+SQL> desc product_master;
+ Name                           
+ ------------------------------
+ PRODUCT_NO                     
+ DESCRIPTION                    
+ PROFIT_PERCENT                 
+ UNIT_MEASURE                   
+ QTY_ON_HAND                    
+ RECORD_LVL                     
+ SELL_PRICE                     
+ COST_PRICE                     
+
+
+
+INSERT INTO product_master VALUES ('p00001', '1.44 Floppies', 5, 'Piece', 100, 20, 525, 500);
+
+INSERT INTO product_master (PRODUCT_NO, DESCRIPTION, PROFIT_PERCENT, UNIT_MEASURE, QTY_ON_HAND, RECORD_LVL, SELL_PRICE, COST_PRICE)
+VALUES ('p03453', 'Monitors', 6, 'Piece', 10, 3, 12000, 11280);
+
+INSERT INTO product_master (PRODUCT_NO, DESCRIPTION, PROFIT_PERCENT, UNIT_MEASURE, QTY_ON_HAND, RECORD_LVL, SELL_PRICE, COST_PRICE)
+VALUES ('p06734', 'Mouse', 5, 'Piece', 20, 5, 1050, 1000);
+
+INSERT INTO product_master (PRODUCT_NO, DESCRIPTION, PROFIT_PERCENT, UNIT_MEASURE, QTY_ON_HAND, RECORD_LVL, SELL_PRICE, COST_PRICE)
+VALUES ('p07865', '1.22 Floppies', 5, 'Piece', 100, 20, 525, 500);
+
+INSERT INTO product_master (PRODUCT_NO, DESCRIPTION, PROFIT_PERCENT, UNIT_MEASURE, QTY_ON_HAND, RECORD_LVL, SELL_PRICE, COST_PRICE)
+VALUES ('p07868', 'Keyboards', 2, 'Piece', 10, 3, 3150, 3050);
+
+INSERT INTO product_master (PRODUCT_NO, DESCRIPTION, PROFIT_PERCENT, UNIT_MEASURE, QTY_ON_HAND, RECORD_LVL, SELL_PRICE, COST_PRICE)
+VALUES ('p07885', 'CD Drive', 2.5, 'Piece', 10, 3, 5250, 5100);
+
+INSERT INTO product_master (PRODUCT_NO, DESCRIPTION, PROFIT_PERCENT, UNIT_MEASURE, QTY_ON_HAND, RECORD_LVL, SELL_PRICE, COST_PRICE)
+VALUES ('p07965', '540 HDD', 4, 'Piece', 10, 3, 8400, 8000);
+
+INSERT INTO product_master (PRODUCT_NO, DESCRIPTION, PROFIT_PERCENT, UNIT_MEASURE, QTY_ON_HAND, RECORD_LVL, SELL_PRICE, COST_PRICE)
+VALUES ('p07975', '1.44 Drive', 5, 'Piece', 10, 3, 1050, 1000);
+
+INSERT INTO product_master (PRODUCT_NO, DESCRIPTION, PROFIT_PERCENT, UNIT_MEASURE, QTY_ON_HAND, RECORD_LVL, SELL_PRICE, COST_PRICE)
+VALUES ('p08865', '1.22 Drive', 5, 'Piece', 2, 3, 1050, 1000);
+
+
+
+SQL> select * from product_master;
+
+PRODUC DESCRIPTION                                        PROFIT_PERCENT UNIT_MEASU QTY_ON_HAND RECORD_LVL SELL_PRICE COST_PRICE
+------ -------------------------------------------------- -------------- ---------- ----------- ---------- ---------- ----------
+p00001 1.44 Floppies                                                   5 Piece              100         20        525        500
+p03453 Monitors                                                        6 Piece               10          3      12000      11280
+p06734 Mouse                                                           5 Piece               20          5       1050       1000
+p07865 1.22 Floppies                                                   5 Piece              100         20        525        500
+p07868 Keyboards                                                       2 Piece               10          3       3150       3050
+p07885 CD Drive                                                      2.5 Piece               10          3       5250       5100
+p07965 540 HDD                                                         4 Piece               10          3       8400       8000
+p07975 1.44 Drive                                                      5 Piece               10          3       1050       1000
+p08865 1.22 Drive                                                      5 Piece                2          3       1050       1000

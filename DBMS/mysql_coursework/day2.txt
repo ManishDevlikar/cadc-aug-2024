@@ -1,0 +1,48 @@
+ select * from emp
+where job= 'manager' or (job='clerk' and deptno=10)
+
+--find all employees who have joined in feb month
+select * from emp
+where hiredate like '_____02___';
+
+--tee command
+	to record for the session till exit
+
+create a folder with "priti"
+tee  d:\priti\day2_commands.txt
+select * from dept;
+select * from emp where deptno =10;
+select * from emp where sal > 1000;
+exit;
+
+--open the file d:\priti\day2_commands.txt
+
+=====================================
+--to see the current date and time
+select now()
+select curdate();  --> current date
+select current_date();  --> current date
+select version();  --> to see the version
+
+status;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
