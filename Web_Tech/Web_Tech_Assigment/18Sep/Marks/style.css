@@ -1,0 +1,65 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #2e2e2e;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+}
+
+.form-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-container label {
+    font-size: 18px;
+    display: block;
+    margin: 10px 0;
+}
+
+.form-container input {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+}
+
+button {
+    padding: 10px 30px;
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.result-container {
+    flex: 1;
+    text-align: left;
+}
+
+.result-container p {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.result-container .highlight {
+    color: red;
+    font-weight: bold;
+}
+
+#pie-chart {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}

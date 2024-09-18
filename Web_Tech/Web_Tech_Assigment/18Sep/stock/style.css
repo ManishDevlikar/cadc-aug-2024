@@ -1,0 +1,17 @@
+body{
+    height: 100vh;
+}
+
+section{
+    height: 90vh;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#calculation{
+    display: flex;
+    flex-direction: column;
+}

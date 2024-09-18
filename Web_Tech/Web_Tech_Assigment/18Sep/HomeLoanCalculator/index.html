@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <section id="homeloan">
+        <form action="">
+            <input type="text" name="amount" id="amount" placeholder="Enter Amount" value="">
+            <input type="text" name="month" id="month" placeholder="Enter month" value="">
+            <input type="text" name="rate" id="rate" placeholder="Enter rate" value="">
+            <input type="result" name="result" id="result" placeholder="Result =" value="">
+        </form>
+        <button type="submit">Calculate</button>
+
+    </section>
+
+        <pre>
+        Formula for EMI Calculation is -
+
+        P x R x (1+R)^N / [(1+R)^N-1] where-
+
+        P = Principal loan amount
+
+        N = Loan tenure in months
+
+        R = Monthly interest rate
+
+        The rate of interest (R) on your loan is calculated per month.
+
+        R = Annual Rate of interest/12/100
+
+        If rate of interest is 7.2% p.a. then r = 7.2/12/100 = 0.006
+
+        For example, If a person avails a loan of ₹10,00,000 at an annual interest rate of 7.2% for a tenure of 120 months (10 years), then his EMI will be calculated as under:
+
+        EMI= ₹10,00,000 * 0.006 * (1 + 0.006)120 / ((1 + 0.006)120 - 1) = ₹11,714.
+        </pre>
+</body>
+</html>

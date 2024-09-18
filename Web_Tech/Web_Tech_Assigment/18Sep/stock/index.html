@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <section id="stock">
+        <div id="first">
+            <p>First Purchase</p>
+            <label for="price1">Old Price</label>
+            <input type="number" name="price1" id="price1" value="">
+            <label for="qun1">Quantity</label>
+            <input type="number" name="qun1" id="qun1" value="">
+        </div>
+        <div id="second">
+            <p>Second purchase</p>
+            <label for="price2">New Price</label>
+            <input type="number" name="price2" id="price2" value="">
+            <label for="qun2">Quantity</label>
+            <input type="number" name="qun2" id="qun2" value="">
+        </div>
+
+        <div class="btn">
+            <button class="cal-btn">Calculate</button>
+        </div>
+
+        <div id="calculation">
+            <div class="avg">
+                <h3>Average Price</h3>
+                <p class="avg-price"></p>
+            </div>
+            <div class="tot-qun">
+                <h3>Total Quantity</h3>
+                <p class="tot-qun-res"></p>
+            </div>
+            <div class="tot-inv">
+                <h3>Total Investment</h3>
+                <p class="tot-inv-val"></p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
